@@ -69,10 +69,14 @@ public class BugsDaoImpl implements BugsDao {
     @Override
     public int addBug(String shortText, String fullText, int userId) throws SQLException {
         int state_id = 1;
+        try (PreparedStatement ps = connection.prepareStatement("")) {
+
+        }
         try (PreparedStatement ps = connection.prepareStatement("INSERT  INTO bugs(short_text, full_text ,state_id ,creator_id ,created) values (?, ?, ?, ?, current_timestamp) ", new String[]{"ID"})) {
             ps.setString(1, shortText);
             ps.setString(2, fullText);
             ps.setInt(3, state_id);
+            ps.setInt(4, userId);
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 rs.next();
