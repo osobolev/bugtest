@@ -28,46 +28,42 @@ public class BugsDaoImpl implements BugsDao {
         try {
             Statement st = connection.createStatement();
             st.execute(
-                "CREATE TABLE users(" +
-                        "ID int," +
-                        "login varchar(50)," +
-                        "pass_hash varchar(64)," +
-                        "PRIMARY KEY(ID)" +
-                        ");"
+                "CREATE TABLE users (" +
+                "  ID int PRIMARY KEY," +
+                "  login varchar(50) not null," +
+                "  pass_hash varchar(64)" +
+                ")"
             );
             st.execute(
-                    "CREATE TABLE states(" +
-                            "ID int," +
-                            "name varchar(50)," +
-                            "order_num int," +
-                            "is_default boolean," +
-                            "PRIMARY KEY(ID)" +
-                            ");"
+                "CREATE TABLE states (" +
+                "  ID int PRIMARY KEY," +
+                "  name varchar(50) not null," +
+                "  order_num int not null," +
+                "  is_default boolean not null" +
+                ")"
             );
             st.execute(
-                    "CREATE TABLE transitions(" +
-                            "state_from int," +
-                            "state_to int," +
-                            "name varchar(50)," +
-                            "order_num int," +
-                            "PRIMARY KEY(state_from , state_to)" +
-                            ");"
+                "CREATE TABLE transitions (" +
+                "  state_from int not null REFERENCES states (ID)," +
+                "  state_to int not null REFERENCES states (ID)," +
+                "  name varchar(50) not null," +
+                "  order_num int not null," +
+                "  PRIMARY KEY (state_from , state_to)" +
+                ")"
             );
             st.execute(
-                    "CREATE TABLE bugs(" +
-                            "ID int," +
-                            "short_text varchar(100)," +
-                            "full_text varchar (1000)," +
-                            "state_id int," +
-                            "creator_id int," +
-                            "created timestamp," +
-                            "PRIMARY KEY(ID)" +
-                            ");"
+                "CREATE TABLE bugs (" +
+                "  ID int PRIMARY KEY," +
+                "  short_text varchar(100) not null," +
+                "  full_text varchar (1000) not null," +
+                "  state_id int not null REFERENCES states (ID)," +
+                "  creator_id int not null REFERENCES users (ID)," +
+                "  created timestamp not null" +
+                ")"
             );
         } catch (SQLException ex) {
             logger.warn(ex.getMessage());
         }
-
     }
 
     @Override
