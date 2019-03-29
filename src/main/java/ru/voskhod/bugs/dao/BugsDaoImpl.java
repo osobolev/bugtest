@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.voskhod.bugs.model.BugData;
 
-import javax.sql.DataSource;
 import javax.xml.bind.DatatypeConverter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -18,15 +17,15 @@ public class BugsDaoImpl implements BugsDao {
 
     private final Logger logger = LoggerFactory.getLogger(BugsDaoImpl.class);
 
-    private DataSource dataSource;
+    private Connection connection;
 
-    public BugsDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public BugsDaoImpl(Connection connection) {
+        this.connection = connection;
     }
 
     @Override
     public void createSchema() {
-        try (Connection connection = dataSource.getConnection()) {
+        try {
             Statement st = connection.createStatement();
             st.execute(
                 "CREATE TABLE users(" +
@@ -68,23 +67,20 @@ public class BugsDaoImpl implements BugsDao {
         } catch (SQLException ex) {
             logger.warn(ex.getMessage());
         }
+
     }
 
     @Override
     public int addBug(String shortText, String fullText, int userId) throws SQLException {
-        try (Connection connection = dataSource.getConnection()) {
-            Statement st = connection.createStatement();
-            st.execute(
-                    "INSERT INTO users(" +
-                            "ID int," +
-                            "login varchar(50)," +
-                            "pass_hash varchar(64)," +
-                            "PRIMARY KEY(ID)" +
-                            ");"
-            );
-        } catch (SQLException ex) {
-            logger.warn(ex.getMessage());
-        }
+        Statement st = connection.createStatement();
+        st.execute(
+                "INSERT INTO users(" +
+                        "ID int," +
+                        "login varchar(50)," +
+                        "pass_hash varchar(64)," +
+                        "PRIMARY KEY(ID)" +
+                        ");"
+        );
         return 0; //id сгенерированной записи
     }
 
