@@ -26,8 +26,7 @@ public class BugsDaoImpl implements BugsDao {
 
     @Override
     public void createSchema() {
-        try {
-            Statement st = connection.createStatement();
+        try (Statement st = connection.createStatement()) {
             st.execute(
                 "CREATE TABLE users (" +
                 "  ID int PRIMARY KEY," +
