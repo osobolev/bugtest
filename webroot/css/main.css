@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background: #e1e3e5;
+    padding: 11px 0;
+}
+
+.header-logo {
+    position: relative;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.add-bug {
+    position: absolute;
+    padding: 11px;
+    top: 11px;
+    left: 11px;
+    background:#b3b3b3;
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.main {
+    position: relative;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.main-table {
+    position: relative;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+}
+
+.main-table-col {
+    position: relative;
+    float: left;
+    width: 192px;
+    margin-right: 10px;
+}
+
+.main-table-col-body::-webkit-scrollbar {
+    width: 0;
+}
+
+.main-table-col:last-child {
+    margin-right: 0;
+}
+
+.main-table-col-name {
+    position: relative;
+    width: 182px;
+    float: left;
+    padding: 10px 5px;
+    background: #b3b3b3;
+    margin-top: 5px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.main-table-col-body {
+    position: relative;
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: visible;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+.main-table-col-cell {
+    position: relative;
+    width: 182px;
+    float: left;
+    padding: 10px 5px;
+    background: #e1e3e5;
+    margin-top: 5px;
+    border-radius: 10px;
+    word-wrap: break-word;
+}
+
+.main-table-col-cell:first-child {
+    margin-top: 0;
+}
+
+.button-new, .button-do, .button-test {
+    position: relative;
+    float: left;
+    width: 89px;
+    padding: 5px 2px;
+    border-radius: 10px;
+    background: #b10000;
+    border: none;
+    font-weight: bold;
+    margin-top: 5px;
+}
