@@ -29,7 +29,41 @@ public class BugsDaoImpl implements BugsDao {
         try (Connection connection = dataSource.getConnection()) {
             Statement st = connection.createStatement();
             st.execute(
-                "CREATE TABLE ..."
+                "CREATE TABLE users(" +
+                        "ID int," +
+                        "login varchar(50)," +
+                        "pass_hash varchar(64)," +
+                        "PRIMARY KEY(ID)" +
+                        ");"
+            );
+            st.execute(
+                    "CREATE TABLE states(" +
+                            "ID int," +
+                            "name varchar(50)," +
+                            "order_num int," +
+                            "is_default boolean," +
+                            "PRIMARY KEY(ID)" +
+                            ");"
+            );
+            st.execute(
+                    "CREATE TABLE transitions(" +
+                            "state_from int," +
+                            "state_to int," +
+                            "name varchar(50)," +
+                            "order_num int," +
+                            "PRIMARY KEY(state_from , state_to)" +
+                            ");"
+            );
+            st.execute(
+                    "CREATE TABLE bugs(" +
+                            "ID int," +
+                            "short_text varchar(100)," +
+                            "full_text varchar (1000)," +
+                            "state_id int," +
+                            "creator_id int," +
+                            "created timestamp," +
+                            "PRIMARY KEY(ID)" +
+                            ");"
             );
         } catch (SQLException ex) {
             logger.warn(ex.getMessage());
@@ -38,7 +72,20 @@ public class BugsDaoImpl implements BugsDao {
 
     @Override
     public int addBug(String shortText, String fullText, int userId) throws SQLException {
-        return 0; // todo
+        try (Connection connection = dataSource.getConnection()) {
+            Statement st = connection.createStatement();
+            st.execute(
+                    "INSERT INTO users(" +
+                            "ID int," +
+                            "login varchar(50)," +
+                            "pass_hash varchar(64)," +
+                            "PRIMARY KEY(ID)" +
+                            ");"
+            );
+        } catch (SQLException ex) {
+            logger.warn(ex.getMessage());
+        }
+        return 0; //id сгенерированной записи
     }
 
     @Override
