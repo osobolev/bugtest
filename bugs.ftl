@@ -18,8 +18,8 @@
                     <#list state.bugs as bug>
                         <div class="main-table-col-cell">
                             <p>${bug.shortText}</p>
-                            <#list state.buttons as buttons>
-                                <input type="button" class="button-do" value=${db.text}>
+                            <#list state.buttons as button>
+                                <input type="button" class="button-do" value=${button.text}>
                             </#list>
                         </div>
                     </#list>
