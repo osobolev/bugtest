@@ -6,15 +6,16 @@
 .header {
     background: #e1e3e5;
     padding: 11px 30px;
-    display: flex;
-    justify-content: space-between;
+    height: 43px;
 }
 
 .header-logo {
-    position: relative;
+    position: absolute;
     font-size: 32px;
     font-weight: bold;
     text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .input-error {
@@ -24,6 +25,7 @@
 .header-info {
     display: flex;
     align-items: center;
+    float: right;
 }
 
 .error-login {
@@ -39,11 +41,12 @@
     padding: 11px;
     top: 11px;
     left: 11px;
-    background:#b3b3b3;
+    background: #b3b3b3;
     border-radius: 10px;
     color: black;
     font-weight: bold;
     text-decoration: none;
+    float: left;
 }
 
 .main {
