@@ -61,6 +61,38 @@ public class BugsDaoImpl implements BugsDao {
                             "  created timestamp not null" +
                             ")"
             );
+            st.execute(
+                "INSERT INTO users (ID, login, pass_hash)" +
+                "VALUES (1, 'test', '626AA60100E38A2B0A8C9B3512116BFB3FF9DB5B986B21B27C2989E011629435')");
+            st.execute(
+                "INSERT INTO users (ID, login, pass_hash)" +
+                "VALUES (2, 'dev', '45B964E3AA69C8806DF775BBB8117CBF679333F0716D38480AB5012131514540')");
+
+            st.execute(
+                "INSERT INTO states (ID, name, order_num, is_default)" +
+                "VALUES (1, 'Новый', 1, true)");
+            st.execute(
+                "INSERT INTO states (ID, name, order_num, is_default)" +
+                "VALUES (2, 'В разработке', 2, false)");
+            st.execute(
+                "INSERT INTO states (ID, name, order_num, is_default)" +
+                "VALUES (3, 'В тестировании', 3, false)");
+            st.execute(
+                "INSERT INTO states (ID, name, order_num, is_default)" +
+                "VALUES (4, 'Закрыт', 4, false)");
+
+            st.execute(
+                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
+                "VALUES (1, 2, 'В разработку', 1)");
+            st.execute(
+                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
+                "VALUES (2, 3, 'В тестирование', 1)");
+            st.execute(
+                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
+                "VALUES (3, 2, 'На доработку', 1)");
+            st.execute(
+                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
+                "VALUES (3, 4, 'Закрыть', 2)");
         } catch (SQLException ex) {
             logger.warn(ex.getMessage());
         }

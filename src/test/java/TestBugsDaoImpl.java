@@ -8,7 +8,10 @@ import ru.voskhod.bugs.view.MainView;
 import ru.voskhod.bugs.view.MainViewImpl;
 
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,40 +26,6 @@ public class TestBugsDaoImpl {
         dao = new BugsDaoImpl(connection);
 
         dao.createSchema();
-        Statement st = connection.createStatement();
-
-        st.execute(
-                "INSERT INTO users (ID, login, pass_hash)" +
-                        "VALUES (1, 'New1', 'hash')");
-        st.execute(
-                "INSERT INTO users (ID, login, pass_hash)" +
-                        "VALUES (2, 'New2', 'hash')");
-
-        st.execute(
-                "INSERT INTO states (ID, name, order_num, is_default)" +
-                        "VALUES (1, 'Новый1', 1, true)");
-        st.execute(
-                "INSERT INTO states (ID, name, order_num, is_default)" +
-                        "VALUES (2, 'В разработке', 2, false)");
-        st.execute(
-                "INSERT INTO states (ID, name, order_num, is_default)" +
-                        "VALUES (3, 'В тестировании', 3, false)");
-        st.execute(
-                "INSERT INTO states (ID, name, order_num, is_default)" +
-                        "VALUES (4, 'Закрыт', 4, false)");
-
-        st.execute(
-                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
-                        "VALUES (1, 2, 'В разработку', 1)");
-        st.execute(
-                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
-                        "VALUES (2, 3, 'В тестирование', 1)");
-        st.execute(
-                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
-                        "VALUES (3, 2, 'На доработку', 1)");
-        st.execute(
-                "INSERT INTO transitions (state_from, state_to, name, order_num)" +
-                        "VALUES (3, 4, 'Закрыть', 2)");
     }
 
 
@@ -97,5 +66,13 @@ public class TestBugsDaoImpl {
         BugData data = dao.getData();
         MainView view = new MainViewImpl();
         view.render(data, new PrintWriter(System.out));
+    }
+
+    @Test
+    public void testHash() {
+        String hash1 = BugsDaoImpl.getHash("test", "test123");
+        System.out.println(hash1);
+        String hash2 = BugsDaoImpl.getHash("dev", "dev123");
+        System.out.println(hash2);
     }
 }
