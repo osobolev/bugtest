@@ -12,7 +12,7 @@
     <p class="header-logo">BUG TRACKER</p>
     <div class="header-info">
         <div class="header-info-username">Привет, Александр</div>
-         <a class="add-bug" href="../login.ftl">
+         <a class="add-bug" href="../logout">
             Выйти
         </a>
     </div>

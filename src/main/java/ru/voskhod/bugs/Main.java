@@ -33,6 +33,7 @@ public class Main {
         handler.addServlet(new ServletHolder(new AddBugServlet(dataSource)), "/app/addbug");
         handler.addServlet(new ServletHolder(new MoveBugServlet(dataSource)), "/app/movebug");
         handler.addServlet(new ServletHolder(new LoginServlet(dataSource)), "/login");
+        handler.addServlet(new ServletHolder(new LogoutServlet()), "/logout");
         handler.addFilter(LoginFilter.class, "/app/*", EnumSet.of(DispatcherType.REQUEST));
 
         server.start();
