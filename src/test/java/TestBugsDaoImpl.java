@@ -42,11 +42,31 @@ public class TestBugsDaoImpl {
     @Test
     public void addBug() throws Exception {
         dao.addBug("Bug1", "Here's new bug", 1);
+        Statement addedBug  = connection.createStatement();
+        ResultSet rs = addedBug.executeQuery(
+                "SELECT id, short_text, full_text ,state_id ,creator_id ,created" +
+                " FROM bugs WHERE id = 1");
+        StringBuilder str = new StringBuilder();
+        while (rs.next()){
+            str.append(rs.getString("id") + rs.getString("short_text") + rs.getString("full_text"));
+        }
+        Assert.assertEquals("1Bug1Here's new bug", str.toString());
+        System.out.println(str.toString());
     }
 
     @Test
     public void moveBug() throws Exception {
+        dao.addBug("Bug1", "Here's new bug", 1);
         dao.moveBug(1, 2);
+
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery("SELECT state_id FROM bugs WHERE id = 1");
+        String str = new String();
+        while (rs.next()){
+          str = rs.getString("state_id");
+        }
+        System.out.println(str);
+        Assert.assertEquals(str, "2");
     }
 
     @Test
