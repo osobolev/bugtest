@@ -99,6 +99,23 @@ public class BugsDaoImpl implements BugsDao {
     }
 
     @Override
+    public boolean isValidMove(int bugId, int newStateId) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(
+            "SELECT b.id" +
+            "  FROM bugs b, transitions t" +
+            " WHERE b.id = ?" +
+            "   AND b.state_id = t.state_from" +
+            "   AND t.state_to = ?"
+        )) {
+            ps.setInt(1, bugId);
+            ps.setInt(2, newStateId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
+    @Override
     public int addBug(String shortText, String fullText, int userId) throws SQLException {
         int state_id;
 

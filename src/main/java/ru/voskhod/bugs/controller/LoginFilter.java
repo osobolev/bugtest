@@ -19,7 +19,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession();
         if (session.getAttribute("userId") == null) {
-            resp.sendRedirect("../login.html");
+            resp.sendRedirect("../login");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
