@@ -95,8 +95,7 @@
 .button-new, .button-do, .button-test {
     position: relative;
     float: left;
-    width: 89px;
-    padding: 5px 2px;
+    padding: 5px 10px;
     border-radius: 10px;
     background: #b10000;
     border: none;
