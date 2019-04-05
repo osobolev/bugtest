@@ -13,12 +13,13 @@
     <div class="header-info">
         <div class="header-info-username">Привет, Александр</div>
          <a class="add-bug" href="../logout">
-            Выйти
+            Выйди
         </a>
     </div>
 </header>
 <div class="main">
     <div class="main-table">
+        <div class="table-outer">
             <#list data.states as state>
                 <div class="main-table-col">
                     <div class="main-table-col-name">${state.name}</div>
@@ -40,6 +41,7 @@
                     </div>
                 </div>
             </#list>
+         </div>
     </div>
     <img src="../images/bug.gif" style="position:absolute; top:0; left:0; z-index: 1;">
 </div>
