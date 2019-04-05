@@ -32,8 +32,7 @@ public class ViewBugsServlet extends HttpServlet {
             BugData bugData = dao.getData();
             Map<String, Object> params = new HashMap<>();
             params.put("data", bugData);
-            resp.setCharacterEncoding("UTF-8");
-            TemplateUtil.render("bugs.ftl", params, resp.getWriter());
+            TemplateUtil.render("bugs.ftl", params, resp);
         } catch (TemplateException | SQLException e) {
             throw new ServletException(e);
         }
