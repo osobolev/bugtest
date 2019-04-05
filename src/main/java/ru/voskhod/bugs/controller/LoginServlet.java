@@ -1,7 +1,9 @@
 package ru.voskhod.bugs.controller;
 
+import freemarker.template.TemplateException;
 import ru.voskhod.bugs.dao.BugsDao;
 import ru.voskhod.bugs.dao.BugsDaoImpl;
+import ru.voskhod.bugs.view.TemplateUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,8 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.OptionalInt;
 
 public class LoginServlet extends HttpServlet {
@@ -22,6 +26,18 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, Object> params = new HashMap<>();
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            resp.setContentType("text/html");
+            TemplateUtil.render("login.ftl", params, resp.getWriter());
+        } catch (TemplateException e) {
+            throw new ServletException(e);
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
@@ -29,13 +45,19 @@ public class LoginServlet extends HttpServlet {
             BugsDao dao = new BugsDaoImpl(connection);
             OptionalInt userId = dao.login(login, password);
             if (!userId.isPresent()) {
-                // todo: показать ошибку
-                resp.sendRedirect("login.html");
+//                resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+//                resp.sendRedirect("login.html");
+                Map<String, Object> params = new HashMap<>();
+                String text_error = "Ошибка в логине или пароле";
+                params.put("error", text_error);
+                resp.setCharacterEncoding("UTF-8");
+                resp.setContentType("text/html");
+                TemplateUtil.render("login.ftl", params, resp.getWriter());
             } else {
                 req.getSession().setAttribute("userId", userId.getAsInt());
                 resp.sendRedirect("app/viewbugs");
             }
-        } catch (SQLException e) {
+        } catch (SQLException | TemplateException e) {
             throw new ServletException(e);
         }
     }
