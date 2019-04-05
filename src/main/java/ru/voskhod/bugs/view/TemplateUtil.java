@@ -8,6 +8,7 @@ import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -33,5 +34,12 @@ public class TemplateUtil {
                               Writer output) throws IOException, TemplateException {
         Template template = CONFIG.getTemplate(templateName);
         template.process(data, output);
+    }
+
+    public static void render(String templateName, Map<String, Object> data,
+                              HttpServletResponse resp) throws IOException, TemplateException {
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        render(templateName, data, resp.getWriter());
     }
 }

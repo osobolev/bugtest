@@ -27,11 +27,9 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> params = new HashMap<>();
-        resp.setCharacterEncoding("UTF-8");
         try {
-            resp.setContentType("text/html");
-            TemplateUtil.render("login.ftl", params, resp.getWriter());
+            Map<String, Object> params = new HashMap<>();
+            TemplateUtil.render("login.ftl", params, resp);
         } catch (TemplateException e) {
             throw new ServletException(e);
         }
@@ -50,9 +48,7 @@ public class LoginServlet extends HttpServlet {
                 Map<String, Object> params = new HashMap<>();
                 String text_error = "Ошибка в логине или пароле";
                 params.put("error", text_error);
-                resp.setCharacterEncoding("UTF-8");
-                resp.setContentType("text/html");
-                TemplateUtil.render("login.ftl", params, resp.getWriter());
+                TemplateUtil.render("login.ftl", params, resp);
             } else {
                 req.getSession().setAttribute("userId", userId.getAsInt());
                 resp.sendRedirect("app/viewbugs");
