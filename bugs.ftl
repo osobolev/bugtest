@@ -11,7 +11,7 @@
     </a>
     <p class="header-logo">BUG TRACKER</p>
     <div class="header-info">
-        <div class="header-info-username">Привет, Александр</div>
+        <div class="header-info-username">Привет, ${login}</div>
          <a class="add-bug" href="../logout">
             Выйди
         </a>

@@ -32,6 +32,7 @@ public class ViewBugsServlet extends HttpServlet {
             BugData bugData = dao.getData();
             Map<String, Object> params = new HashMap<>();
             params.put("data", bugData);
+            params.put("login",req.getSession().getAttribute("login"));
             TemplateUtil.render("bugs.ftl", params, resp);
         } catch (TemplateException | SQLException e) {
             throw new ServletException(e);

@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
                 TemplateUtil.render("login.ftl", params, resp);
             } else {
                 req.getSession().setAttribute("userId", userId.getAsInt());
+                req.getSession().setAttribute("login", login);
                 resp.sendRedirect("app/viewbugs");
             }
         } catch (SQLException | TemplateException e) {
