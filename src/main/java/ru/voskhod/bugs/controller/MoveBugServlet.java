@@ -24,20 +24,17 @@ public class MoveBugServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try (Connection connection = dataSource.getConnection()) {
-
-            String bugId = req.getParameter("bugId");
-            String newStateId = req.getParameter("newStateId");
-            System.out.println(bugId);
-            System.out.println(newStateId);
+            String bugIdStr = req.getParameter("bugId");
+            String newStateIdStr = req.getParameter("newStateId");
 
             BugsDao dao = new BugsDaoImpl(connection);
-            Object maybeUserId = req.getSession().getAttribute("userId");
-            if (maybeUserId == null) {
+            int bugId = Integer.parseInt(bugIdStr);
+            int newStateId = Integer.parseInt(newStateIdStr);
+            if (!dao.isValidMove(bugId, newStateId)) {
                 resp.sendError(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }
-            int userId = ((Integer) maybeUserId).intValue();
-            dao.moveBug(Integer.valueOf(bugId), Integer.valueOf(newStateId));
+            dao.moveBug(bugId, newStateId);
             resp.sendRedirect("viewbugs");
         } catch (SQLException e) {
             throw new ServletException(e);

@@ -11,6 +11,8 @@ public interface BugsDao {
 
     int addBug(String shortText, String fullText, int userId) throws SQLException;
 
+    boolean isValidMove(int bugId, int newStateId) throws SQLException;
+
     void moveBug(int bugId, int newStateId) throws SQLException;
 
     OptionalInt login(String login, String password) throws SQLException;
