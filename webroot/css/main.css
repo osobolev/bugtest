@@ -21,6 +21,16 @@
     border: 1px solid #ff0000;
 }
 
+.header-info {
+    display: flex;
+    align-items: center;
+}
+
+.error-login {
+    color: #ff0000;
+    font-size: 12.5px;
+}
+
 .add-bug {
     padding: 11px;
     top: 11px;

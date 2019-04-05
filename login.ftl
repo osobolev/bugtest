@@ -10,7 +10,9 @@
     </header>
     <div class="main">
         <div class="main-form">
-            <#if error??>${error}</#if>
+            <#if error??>
+                <div class="error-login">${error}</div>
+            </#if>
             <form method="POST" action="login">
                 <input type="text" name="login" id="login" placeholder="Логин">
                 <input type="password" name="password" id="password" placeholder="Пароль">

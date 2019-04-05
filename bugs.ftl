@@ -10,9 +10,12 @@
         Добавить баг
     </a>
     <p class="header-logo">BUG TRACKER</p>
-     <a class="add-bug" href="../login.ftl">
-        Выйти
-    </a>
+    <div class="header-info">
+        <div class="header-info-username">Привет, Александр</div>
+         <a class="add-bug" href="../login.ftl">
+            Выйти
+        </a>
+    </div>
 </header>
 <div class="main">
     <div class="main-table">
