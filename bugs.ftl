@@ -6,9 +6,12 @@
 </head>
 <body>
 <header class="header">
+    <a class="add-bug" href="../addbug.html">
+        Добавить баг
+    </a>
     <p class="header-logo">BUG TRACKER</p>
-    <a href="../addbug.html">
-        <div class="add-bug">Добавить баг</div>
+     <a class="add-bug" href="../login.ftl">
+        Выйти
     </a>
 </header>
 <div class="main">

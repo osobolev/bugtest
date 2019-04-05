@@ -1,4 +1,4 @@
-<html> 
+﻿<html> 
 <head> 
 <title>Bug Tracker</title> 
 <link rel="stylesheet" type="text/css" href="css/main.css"> 
@@ -10,6 +10,7 @@
     </header>
     <div class="main">
         <div class="main-form">
+            <#if error??>adasdasdasdsadas<#if>
             <form method="POST" action="login">
                 <input type="text" name="login" id="login" placeholder="Логин">
                 <input type="password" name="password" id="password" placeholder="Пароль">

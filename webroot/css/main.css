@@ -5,7 +5,9 @@
 
 .header {
     background: #e1e3e5;
-    padding: 11px 0;
+    padding: 11px 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header-logo {
@@ -15,8 +17,11 @@
     text-align: center;
 }
 
+.input-error {
+    border: 1px solid #ff0000;
+}
+
 .add-bug {
-    position: absolute;
     padding: 11px;
     top: 11px;
     left: 11px;
@@ -24,6 +29,7 @@
     border-radius: 10px;
     color: black;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .main {
